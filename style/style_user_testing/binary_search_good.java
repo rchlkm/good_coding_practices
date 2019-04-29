@@ -1,44 +1,28 @@
-// Java implementation of recursive Binary Search 
+// Java implementation of iterative Binary Search 
 class BinarySearch { 
-    // Returns index of x if it is present in arr[l.. 
-    // r], else return -1 
-    int binarySearch(int arr[], int l, int r, int x) 
+    // Returns index of x if it is present in arr[], 
+    // else return -1 
+    int binarySearch(int arr[], int x) 
     { 
-        if (r >= l) { 
-            int mid = l + (r - l) / 2; 
+        int l = 0, r = arr.length - 1; 
+        while (l <= r) { 
+            int m = l + (r - l) / 2; 
   
-            // If the element is present at the 
-            // middle itself 
-            if (arr[mid] == x) 
-                return mid; 
+            // Check if x is present at mid 
+            if (arr[m] == x) 
+              return m; 
   
-            // If element is smaller than mid, then 
-            // it can only be present in left subarray 
-            if (arr[mid] > x) 
-                return binarySearch(arr, l, mid - 1, x); 
+            // If x greater, ignore left half 
+            if (arr[m] < x) 
+                l = m + 1; 
   
-            // Else the element can only be present 
-            // in right subarray 
-            return binarySearch(arr, mid + 1, r, x); 
+            // If x is smaller, ignore right half 
+            else
+              r = m - 1; 
         } 
   
-        // We reach here when element is not present 
-        // in array 
+        // if we reach here, then element was 
+        // not present 
         return -1; 
     } 
-  
-    // Driver method to test above 
-    public static void main(String args[]) 
-    { 
-        BinarySearch ob = new BinarySearch(); 
-        int arr[] = { 2, 3, 4, 10, 40 }; 
-        int n = arr.length; 
-        int x = 10; 
-        int result = ob.binarySearch(arr, 0, n - 1, x); 
-        if (result == -1) 
-            System.out.println("Element not present"); 
-        else
-            System.out.println("Element found at index " + result); 
-    } 
-} 
-/* This code is contributed by Rajat Mishra */
+}
